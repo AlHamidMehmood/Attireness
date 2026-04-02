@@ -10,8 +10,12 @@
   --color-brand-accent: #c5a059;
 }
 
-@layer base {
-  body {
-    @apply bg-brand-white text-brand-black font-sans antialiased;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
