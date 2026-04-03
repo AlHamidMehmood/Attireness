@@ -1,9 +1,11 @@
 import { ShoppingBag, Search, User, Heart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { setIsCartOpen, itemCount } = useCart();
 
   const navLinks = [
     { name: "New Arrivals", href: "#" },
@@ -27,7 +29,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="text-2xl font-serif font-bold tracking-tighter">
-              ATTIRENESS<span className="text-brand-accent">.</span>
+              ATTIRENESS<span className="text-brand-black">.</span>
             </a>
           </div>
 
@@ -37,7 +39,7 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium uppercase tracking-widest hover:text-brand-accent transition-colors duration-300"
+                className="text-sm font-medium uppercase tracking-widest hover:text-brand-black/60 transition-colors duration-300"
               >
                 {link.name}
               </a>
@@ -46,18 +48,25 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="flex items-center space-x-5">
-            <button className="p-2 hover:text-brand-accent transition-colors">
+            <button className="p-2 hover:text-brand-black/60 transition-colors">
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <button className="hidden sm:block p-2 hover:text-brand-accent transition-colors">
+            <button className="hidden sm:block p-2 hover:text-brand-black/60 transition-colors">
               <User size={20} strokeWidth={1.5} />
             </button>
-            <button className="hidden sm:block p-2 hover:text-brand-accent transition-colors">
+            <button className="hidden sm:block p-2 hover:text-brand-black/60 transition-colors">
               <Heart size={20} strokeWidth={1.5} />
             </button>
-            <button className="p-2 relative hover:text-brand-accent transition-colors">
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="p-2 relative hover:text-brand-black/60 transition-colors"
+            >
               <ShoppingBag size={20} strokeWidth={1.5} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-brand-accent rounded-full"></span>
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 w-4 h-4 bg-brand-black text-brand-white text-[8px] font-bold rounded-full flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
             </button>
           </div>
         </div>

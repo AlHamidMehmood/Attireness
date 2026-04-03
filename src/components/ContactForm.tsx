@@ -41,7 +41,7 @@ export default function ContactForm() {
           {/* Info Side */}
           <div className="space-y-8">
             <div>
-              <span className="text-brand-accent font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
+              <span className="text-brand-black/40 font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
                 Get in Touch
               </span>
               <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6">
@@ -54,7 +54,7 @@ export default function ContactForm() {
 
             <div className="space-y-6 pt-4">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-accent">
+                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-black">
                   <Mail size={18} />
                 </div>
                 <div>
@@ -63,7 +63,7 @@ export default function ContactForm() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-accent">
+                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-black">
                   <MessageSquare size={18} />
                 </div>
                 <div>

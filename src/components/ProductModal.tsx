@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { X, ShoppingBag, Heart } from "lucide-react";
 import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 interface ProductModalProps {
   product: Product;
@@ -10,6 +11,7 @@ interface ProductModalProps {
 
 export default function ProductModal({ product, onClose }: ProductModalProps) {
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const isFavorited = isInWishlist(product.id);
 
   return (
@@ -57,7 +59,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
             <div className="space-y-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-brand-accent font-bold mb-2">
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-black/40 font-bold mb-2">
                   {product.category}
                 </p>
                 <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight mb-4">
@@ -66,7 +68,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <div className="flex items-center gap-4">
                   {product.isSale ? (
                     <>
-                      <span className="text-2xl font-bold text-brand-accent">${product.salePrice}</span>
+                      <span className="text-2xl font-bold text-brand-black">${product.salePrice}</span>
                       <span className="text-lg text-brand-black/40 line-through">${product.price}</span>
                     </>
                   ) : (
@@ -114,7 +116,13 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
               {/* Actions */}
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <button className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-colors group">
+                <button 
+                  onClick={() => {
+                    addToCart(product);
+                    onClose();
+                  }}
+                  className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-colors group"
+                >
                   <ShoppingBag size={18} />
                   Add to Shopping Bag
                 </button>

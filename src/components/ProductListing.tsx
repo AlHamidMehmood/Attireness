@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { LayoutGrid, List, Filter, Loader2, Heart } from "lucide-react";
+import { LayoutGrid, List, Filter, Loader2, Heart, ShoppingBag } from "lucide-react";
 import { Product } from "../types";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 export default function ProductListing() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -13,14 +14,15 @@ export default function ProductListing() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         
-        // Use absolute path which is more reliable in various environments
-        const response = await fetch('/products.json');
+        // Use relative path which is more reliable in various environments
+        const response = await fetch('products.json');
         
         if (!response.ok) {
           throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
@@ -31,9 +33,13 @@ export default function ProductListing() {
       } catch (error) {
         console.error("Error fetching products:", error);
         // Fallback to imported constant if fetch fails to ensure the grid reappears
-        import("../constants").then(({ PRODUCTS }) => {
+        // Using a more robust way to handle the fallback
+        try {
+          const { PRODUCTS } = await import("../constants");
           setProducts(PRODUCTS);
-        });
+        } catch (importError) {
+          console.error("Fallback import failed:", importError);
+        }
       } finally {
         setLoading(false);
       }
@@ -54,7 +60,7 @@ export default function ProductListing() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
           <div>
-            <span className="text-brand-accent font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
+            <span className="text-brand-black/40 font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
               Our Selection
             </span>
             <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight">
@@ -142,19 +148,31 @@ export default function ProductListing() {
                 </div>
                 <div className="flex-1 space-y-4">
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-brand-accent font-bold mb-1">{product.category}</p>
+                    <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold mb-1">{product.category}</p>
                     <h3 className="text-xl font-serif font-bold">{product.name}</h3>
                   </div>
                   <p className="text-sm text-brand-black/60 max-w-xl line-clamp-2">{product.description}</p>
                   <div className="flex items-center gap-6">
                     <div className="flex items-center gap-4">
                       <span className="text-lg font-bold">${product.isSale ? product.salePrice : product.price}</span>
-                      <button 
-                        onClick={() => setSelectedProduct(product)}
-                        className="text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors"
-                      >
-                        View Details
-                      </button>
+                      <div className="flex gap-2">
+                        <button 
+                          onClick={() => setSelectedProduct(product)}
+                          className="text-xs font-bold uppercase tracking-widest border border-brand-black text-brand-black px-6 py-3 hover:bg-brand-black hover:text-brand-white transition-colors"
+                        >
+                          Details
+                        </button>
+                        <button 
+                          onClick={() => {
+                            addToCart(product);
+                            console.log(`Added to Cart: ${product.name}`);
+                          }}
+                          className="text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors flex items-center gap-2"
+                        >
+                          <ShoppingBag size={14} />
+                          Add to Bag
+                        </button>
+                      </div>
                     </div>
                     <button 
                       onClick={(e) => {

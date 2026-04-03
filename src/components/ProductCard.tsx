@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ShoppingBag, Heart, Eye } from "lucide-react";
 import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const isFavorited = isInWishlist(product.id);
 
   return (
@@ -41,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
             </span>
           )}
           {product.isSale && (
-            <span className="bg-brand-accent text-brand-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">
+            <span className="bg-brand-black text-brand-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">
               Sale
             </span>
           )}
@@ -91,6 +93,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
             <Heart size={20} strokeWidth={1.5} fill={isFavorited ? "currentColor" : "none"} />
           </button>
           <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+              console.log(`Added to Cart: ${product.name}`);
+            }}
             className="w-12 h-12 bg-brand-black text-brand-white rounded-full flex items-center justify-center hover:bg-brand-black/80 transition-colors shadow-lg"
             title="Add to Cart"
           >
@@ -105,13 +112,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
           <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-semibold">
             {product.category}
           </p>
-          <h3 className="text-sm font-medium tracking-tight group-hover:text-brand-accent transition-colors">
+          <h3 className="text-sm font-medium tracking-tight group-hover:text-brand-black/60 transition-colors">
             {product.name}
           </h3>
           <div className="flex items-center gap-2">
             {product.isSale ? (
               <>
-                <span className="text-sm font-bold text-brand-accent">${product.salePrice}</span>
+                <span className="text-sm font-bold text-brand-black">${product.salePrice}</span>
                 <span className="text-xs text-brand-black/40 line-through">${product.price}</span>
               </>
             ) : (
@@ -120,16 +127,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
           </div>
         </div>
         
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log("Product Details:", { id: product.id, name: product.name });
-            onQuickView(product);
-          }}
-          className="w-full py-4 bg-brand-black text-brand-white text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black/80 transition-all duration-300"
-        >
-          View Details
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("Product Details:", { id: product.id, name: product.name });
+              onQuickView(product);
+            }}
+            className="flex-1 py-4 border border-brand-black text-brand-black text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black hover:text-brand-white transition-all duration-300"
+          >
+            Details
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+              console.log(`Added to Cart: ${product.name}`);
+            }}
+            className="flex-1 py-4 bg-brand-black text-brand-white text-[10px] font-bold uppercase tracking-widest hover:bg-brand-black/80 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <ShoppingBag size={14} />
+            Add
+          </button>
+        </div>
       </div>
     </motion.div>
   );
