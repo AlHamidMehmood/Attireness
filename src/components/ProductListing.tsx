@@ -18,8 +18,6 @@ export default function ProductListing() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 3000));
         
         // Use relative path which is more reliable in various environments
         const response = await fetch('./products.json');
