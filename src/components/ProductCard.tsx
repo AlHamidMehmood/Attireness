@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { ShoppingBag, Heart, Eye } from "lucide-react";
 import { Product } from "../types";
+import { useWishlist } from "../context/WishlistContext";
 
 interface ProductCardProps {
   product: Product;
@@ -10,6 +11,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const isFavorited = isInWishlist(product.id);
 
   return (
     <motion.div
@@ -44,6 +47,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
           )}
         </div>
 
+        {/* Persistent Wishlist Button (Top Right) */}
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleWishlist(product.id);
+            console.log(`Wishlist Updated: ${product.name}`);
+          }}
+          className={`absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${
+            isFavorited 
+              ? 'bg-brand-white text-brand-accent' 
+              : 'bg-brand-white/80 backdrop-blur text-brand-black hover:bg-brand-white'
+          }`}
+          title={isFavorited ? "Remove from Wishlist" : "Add to Wishlist"}
+        >
+          <Heart 
+            size={18} 
+            fill={isFavorited ? "currentColor" : "none"} 
+            className={isFavorited ? "scale-110" : ""}
+          />
+        </button>
+
         {/* Quick Actions Overlay */}
         <div className={`absolute inset-0 bg-brand-black/20 transition-opacity duration-300 flex items-center justify-center gap-3 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
           <button 
@@ -54,10 +78,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
             <Eye size={20} strokeWidth={1.5} />
           </button>
           <button 
-            className="w-12 h-12 bg-brand-white rounded-full flex items-center justify-center hover:bg-brand-accent hover:text-brand-white transition-colors shadow-lg"
-            title="Add to Wishlist"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleWishlist(product.id);
+              console.log(`Wishlist Updated: ${product.name}`);
+            }}
+            className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors shadow-lg ${
+              isFavorited ? 'bg-brand-accent text-brand-white' : 'bg-brand-white hover:bg-brand-accent hover:text-brand-white'
+            }`}
+            title={isFavorited ? "Remove from Wishlist" : "Add to Wishlist"}
           >
-            <Heart size={20} strokeWidth={1.5} />
+            <Heart size={20} strokeWidth={1.5} fill={isFavorited ? "currentColor" : "none"} />
           </button>
           <button 
             className="w-12 h-12 bg-brand-white rounded-full flex items-center justify-center hover:bg-brand-accent hover:text-brand-white transition-colors shadow-lg"

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { LayoutGrid, List, Filter, Loader2 } from "lucide-react";
+import { LayoutGrid, List, Filter, Loader2, Heart } from "lucide-react";
 import { Product } from "../types";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function ProductListing() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -11,6 +12,7 @@ export default function ProductListing() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -146,13 +148,27 @@ export default function ProductListing() {
                     <h3 className="text-xl font-serif font-bold">{product.name}</h3>
                   </div>
                   <p className="text-sm text-brand-black/60 max-w-xl line-clamp-2">{product.description}</p>
-                  <div className="flex items-center gap-4">
-                    <span className="text-lg font-bold">${product.isSale ? product.salePrice : product.price}</span>
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4">
+                      <span className="text-lg font-bold">${product.isSale ? product.salePrice : product.price}</span>
+                      <button 
+                        onClick={() => setSelectedProduct(product)}
+                        className="text-xs font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
+                      >
+                        View Details
+                      </button>
+                    </div>
                     <button 
-                      onClick={() => setSelectedProduct(product)}
-                      className="text-xs font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleWishlist(product.id);
+                        console.log(`Wishlist Updated: ${product.name}`);
+                      }}
+                      className={`p-2 rounded-full transition-colors ${
+                        isInWishlist(product.id) ? 'text-brand-accent' : 'text-brand-black/20 hover:text-brand-black'
+                      }`}
                     >
-                      View Details
+                      <Heart size={20} fill={isInWishlist(product.id) ? "currentColor" : "none"} />
                     </button>
                   </div>
                 </div>

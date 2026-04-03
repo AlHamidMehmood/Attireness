@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { X, ShoppingBag, Heart } from "lucide-react";
 import { Product } from "../types";
+import { useWishlist } from "../context/WishlistContext";
 
 interface ProductModalProps {
   product: Product;
@@ -8,6 +9,9 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ product, onClose }: ProductModalProps) {
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  const isFavorited = isInWishlist(product.id);
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
       {/* Backdrop */}
@@ -114,8 +118,17 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                   <ShoppingBag size={18} />
                   Add to Shopping Bag
                 </button>
-                <button className="w-full sm:w-16 h-16 border border-brand-black/10 flex items-center justify-center hover:bg-brand-black hover:text-brand-white transition-colors">
-                  <Heart size={20} />
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleWishlist(product.id);
+                    console.log(`Wishlist Updated: ${product.name}`);
+                  }}
+                  className={`w-full sm:w-16 h-16 border border-brand-black/10 flex items-center justify-center transition-colors ${
+                    isFavorited ? 'bg-brand-black text-brand-white' : 'hover:bg-brand-black hover:text-brand-white'
+                  }`}
+                >
+                  <Heart size={20} fill={isFavorited ? "currentColor" : "none"} />
                 </button>
               </div>
 
