@@ -19,8 +19,8 @@ export default function ProductListing() {
       try {
         setLoading(true);
         
-        // Use relative path which is more reliable in various environments
-        const response = await fetch('./products.json');
+        // Use absolute path which is more reliable in various environments
+        const response = await fetch('/products.json');
         
         if (!response.ok) {
           throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
@@ -42,7 +42,7 @@ export default function ProductListing() {
     fetchProducts();
   }, []);
 
-  const categories = ['All', 'Outerwear', 'Dresses', 'Knitwear', 'Trousers', 'Accessories', 'Shirts', 'Footwear', 'Jewelry'];
+  const categories = ['All', 'WOMEN', 'MEN', 'FRAGNANCES', 'MAKEUP', 'LEATHER GOODS', 'JEWELRY', 'WATCHES', 'SURPRISES TE GIFTS'];
 
   const filteredProducts = activeCategory === 'All' 
     ? products 
