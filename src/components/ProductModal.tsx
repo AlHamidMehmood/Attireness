@@ -101,7 +101,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <div className="space-y-3">
                   <h4 className="text-xs uppercase tracking-widest font-bold text-brand-black/40">Select Color</h4>
                   <div className="flex gap-3">
-                    {['#121212', '#c5a059', '#e5e5e5'].map((color) => (
+                    {['#000000', '#FFFFFF', '#E5E5E5'].map((color) => (
                       <button
                         key={color}
                         className="w-8 h-8 rounded-full border border-brand-black/10 p-1"
@@ -114,7 +114,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
               {/* Actions */}
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <button className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-3 hover:bg-brand-accent transition-colors group">
+                <button className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-colors group">
                   <ShoppingBag size={18} />
                   Add to Shopping Bag
                 </button>

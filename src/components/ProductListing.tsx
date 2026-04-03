@@ -78,7 +78,7 @@ export default function ProductListing() {
                 <List size={18} />
               </button>
             </div>
-            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors">
+            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors">
               <Filter size={14} />
               Filter
             </button>
@@ -99,7 +99,7 @@ export default function ProductListing() {
               {activeCategory === cat && (
                 <motion.div
                   layoutId="activeCat"
-                  className="absolute bottom-0 left-0 w-full h-[2px] bg-brand-accent"
+                  className="absolute bottom-0 left-0 w-full h-[2px] bg-brand-black"
                 />
               )}
             </button>
@@ -109,7 +109,7 @@ export default function ProductListing() {
         {/* Grid/List Rendering */}
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 space-y-4">
-            <Loader2 className="w-10 h-10 text-brand-accent animate-spin" />
+            <Loader2 className="w-10 h-10 text-brand-black animate-spin" />
             <p className="text-sm font-medium uppercase tracking-widest text-brand-black/40">Loading Collection...</p>
           </div>
         ) : viewMode === 'grid' ? (
@@ -151,7 +151,7 @@ export default function ProductListing() {
                       <span className="text-lg font-bold">${product.isSale ? product.salePrice : product.price}</span>
                       <button 
                         onClick={() => setSelectedProduct(product)}
-                        className="text-xs font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
+                        className="text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors"
                       >
                         View Details
                       </button>
@@ -163,7 +163,7 @@ export default function ProductListing() {
                         console.log(`Wishlist Updated: ${product.name}`);
                       }}
                       className={`p-2 rounded-full transition-colors ${
-                        isInWishlist(product.id) ? 'text-brand-accent' : 'text-brand-black/20 hover:text-brand-black'
+                        isInWishlist(product.id) ? 'text-brand-black' : 'text-brand-black/20 hover:text-brand-black'
                       }`}
                     >
                       <Heart size={20} fill={isInWishlist(product.id) ? "currentColor" : "none"} />

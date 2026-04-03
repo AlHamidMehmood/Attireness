@@ -85,7 +85,7 @@ export default function ContactForm() {
                   exit={{ opacity: 0, y: -20 }}
                   className="bg-gray-50 p-12 flex flex-col items-center text-center justify-center min-h-[400px]"
                 >
-                  <div className="w-16 h-16 bg-brand-accent/10 text-brand-accent rounded-full flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-brand-black/5 text-brand-black rounded-full flex items-center justify-center mb-6">
                     <CheckCircle2 size={32} />
                   </div>
                   <h3 className="text-2xl font-serif font-bold mb-4">Message Received</h3>
@@ -94,7 +94,7 @@ export default function ContactForm() {
                   </p>
                   <button 
                     onClick={() => setIsSubmitted(false)}
-                    className="mt-8 text-[10px] font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-accent hover:border-brand-accent transition-colors"
+                    className="mt-8 text-[10px] font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:text-brand-black/60 hover:border-brand-black/60 transition-colors"
                   >
                     Send another message
                   </button>
@@ -121,7 +121,7 @@ export default function ContactForm() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-accent outline-none transition-all"
+                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all"
                     />
                   </div>
 
@@ -138,7 +138,7 @@ export default function ContactForm() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Enter your email"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-accent outline-none transition-all"
+                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all"
                     />
                   </div>
 
@@ -155,14 +155,14 @@ export default function ContactForm() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="How can we help you?"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-accent outline-none transition-all resize-none"
+                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all resize-none"
                     />
                   </div>
 
                   <button
                     disabled={isSubmitting}
                     type="submit"
-                    className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-[10px] font-bold flex items-center justify-center gap-3 hover:bg-brand-accent transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
+                    className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-[10px] font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
                   >
                     {isSubmitting ? (
                       <motion.div
