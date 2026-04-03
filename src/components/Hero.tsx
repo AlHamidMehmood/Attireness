@@ -3,106 +3,55 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-brand-white">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f3f3f3] -z-10 hidden lg:block" />
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.1, scale: 1 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-        className="absolute -top-20 -left-20 w-96 h-96 bg-brand-black rounded-full blur-[120px] -z-10"
-      />
+    <section className="relative h-screen w-full overflow-hidden bg-brand-black">
+      {/* Full-Bleed Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2000" 
+          alt="Luxury Fashion Silk" 
+          className="w-full h-full object-cover opacity-90"
+          referrerPolicy="no-referrer"
+        />
+        {/* Subtle Gradient Overlay for Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black/60 via-transparent to-transparent" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+      {/* Content Overlay - Bottom Left with Extreme Padding */}
+      <div className="absolute bottom-0 left-0 w-full p-12 md:p-24 lg:p-32 z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl"
+        >
+          <span className="inline-block text-brand-white/70 font-sans tracking-[0.2em] uppercase text-[11px] mb-6">
+            Collection 2026
+          </span>
+          <h1 className="text-7xl md:text-[120px] lg:text-[160px] font-serif font-light text-brand-white leading-[0.85] mb-12 tracking-[-0.02em]">
+            Silk on <br />
+            <span className="italic">the news</span>
+          </h1>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
+            <a 
+              href="#products" 
+              className="inline-block text-brand-white font-sans uppercase tracking-[0.2em] text-[12px] border-b border-brand-white pb-2 hover:text-brand-white/70 hover:border-brand-white/70 transition-all duration-300"
             >
-              <span className="inline-block text-brand-black/40 font-semibold tracking-[0.3em] uppercase text-xs mb-4">
-                New Collection 2026
-              </span>
-              <h1 className="text-6xl md:text-8xl font-serif font-bold leading-[0.9] mb-8 tracking-tighter">
-                Elevate Your <br />
-                <span className="italic text-brand-black">Everyday</span> Style
-              </h1>
-              <p className="text-lg text-brand-black/60 max-w-md mb-10 leading-relaxed">
-                Discover our curated selection of premium essentials designed for the modern individual. Quality craftsmanship meets timeless design.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-brand-black text-brand-white px-10 py-5 rounded-none font-medium uppercase tracking-widest text-sm flex items-center justify-center group"
-                >
-                  Shop Now
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="border border-brand-black text-brand-black px-10 py-5 rounded-none font-medium uppercase tracking-widest text-sm hover:bg-brand-black hover:text-brand-white transition-colors"
-                >
-                  View Lookbook
-                </motion.button>
-              </div>
-            </motion.div>
+              Edit your style
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
 
-            {/* Stats/Trust Badges */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="mt-16 flex items-center space-x-12 border-t border-brand-black/5 pt-8"
-            >
-              <div>
-                <p className="text-2xl font-serif font-bold">15k+</p>
-                <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-semibold">Happy Clients</p>
-              </div>
-              <div>
-                <p className="text-2xl font-serif font-bold">200+</p>
-                <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-semibold">Premium Brands</p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Hero Image Section */}
-          <div className="relative">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-[4/5] w-full max-w-md mx-auto lg:ml-auto"
-            >
-              {/* Main Image */}
-              <div className="absolute inset-0 border-[12px] border-brand-white shadow-2xl z-20 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" 
-                  alt="Modern Fashion" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              
-              {/* Floating Element 1 */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-10 -left-10 bg-brand-white p-6 shadow-xl z-30 hidden sm:block border border-brand-black/5"
-              >
-                <p className="text-xs font-bold uppercase tracking-widest mb-1">Exclusive</p>
-                <p className="text-xl font-serif italic">Summer Drop</p>
-              </motion.div>
-
-              {/* Floating Element 2 (Accent Box) */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-brand-black/5 -z-10" />
-            </motion.div>
-          </div>
-        </div>
+      {/* Vertical Side Label (Magazine Style) */}
+      <div className="absolute top-1/2 right-12 -translate-y-1/2 hidden lg:block">
+        <p className="text-brand-white/30 font-sans uppercase tracking-[0.5em] text-[10px] rotate-90 origin-right whitespace-nowrap">
+          Atelier Moderne — Spring Summer Edition
+        </p>
       </div>
     </section>
   );

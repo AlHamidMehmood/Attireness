@@ -28,7 +28,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-serif font-bold tracking-tighter">
+            <a href="/" className="text-2xl font-serif font-light tracking-[0.05em]">
               ATTIRENESS<span className="text-brand-black">.</span>
             </a>
           </div>
@@ -39,7 +39,7 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium uppercase tracking-widest hover:text-brand-black/60 transition-colors duration-300"
+                className="text-[11px] font-sans uppercase tracking-[0.15em] hover:text-brand-black/60 transition-colors duration-300"
               >
                 {link.name}
               </a>

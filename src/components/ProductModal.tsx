@@ -41,7 +41,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           </button>
 
           {/* Image Section */}
-          <div className="w-full md:w-1/2 relative bg-gray-100 overflow-hidden">
+          <div className="w-full md:w-1/2 relative border-r border-brand-black/5 overflow-hidden">
             <img
               src={product.image}
               alt={product.name}
@@ -59,27 +59,27 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
             <div className="space-y-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-brand-black/40 font-bold mb-2">
+                <p className="text-[11px] uppercase tracking-[0.1em] text-brand-black/40 font-sans mb-2">
                   {product.category}
                 </p>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight mb-4">
+                <h2 className="text-4xl md:text-5xl font-serif font-light tracking-[0.05em] mb-4">
                   {product.name}
                 </h2>
                 <div className="flex items-center gap-4">
                   {product.isSale ? (
                     <>
-                      <span className="text-2xl font-bold text-brand-black">${product.salePrice}</span>
-                      <span className="text-lg text-brand-black/40 line-through">${product.price}</span>
+                      <span className="text-2xl font-sans tracking-[0.05em] text-brand-black">${product.salePrice}</span>
+                      <span className="text-lg text-brand-black/40 line-through font-sans">${product.price}</span>
                     </>
                   ) : (
-                    <span className="text-2xl font-bold">${product.price}</span>
+                    <span className="text-2xl font-sans tracking-[0.05em]">${product.price}</span>
                   )}
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xs uppercase tracking-widest font-bold text-brand-black/40">Description</h4>
-                <p className="text-brand-black/70 leading-relaxed">
+                <h4 className="text-[11px] uppercase tracking-[0.1em] font-sans text-brand-black/40">Description</h4>
+                <p className="text-brand-black/70 leading-relaxed font-sans font-light">
                   {product.description}
                 </p>
               </div>
@@ -87,12 +87,12 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               {/* Options (Mock) */}
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <h4 className="text-xs uppercase tracking-widest font-bold text-brand-black/40">Select Size</h4>
+                  <h4 className="text-[11px] uppercase tracking-[0.1em] font-sans text-brand-black/40">Select Size</h4>
                   <div className="flex flex-wrap gap-2">
                     {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
                       <button
                         key={size}
-                        className="w-12 h-12 border border-brand-black/10 flex items-center justify-center text-sm font-medium hover:border-brand-black transition-colors"
+                        className="w-12 h-12 border border-brand-black/10 flex items-center justify-center text-[11px] font-sans uppercase tracking-[0.1em] hover:border-brand-black transition-colors"
                       >
                         {size}
                       </button>
@@ -101,7 +101,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="text-xs uppercase tracking-widest font-bold text-brand-black/40">Select Color</h4>
+                  <h4 className="text-[11px] uppercase tracking-[0.1em] font-sans text-brand-black/40">Select Color</h4>
                   <div className="flex gap-3">
                     {['#000000', '#FFFFFF', '#E5E5E5'].map((color) => (
                       <button
@@ -121,7 +121,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     addToCart(product);
                     onClose();
                   }}
-                  className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-xs font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-colors group"
+                  className="flex-1 bg-brand-black text-brand-white py-5 px-8 uppercase tracking-[0.1em] text-[11px] font-sans flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-colors group"
                 >
                   <ShoppingBag size={18} />
                   Add to Shopping Bag

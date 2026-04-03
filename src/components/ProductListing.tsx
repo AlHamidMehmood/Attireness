@@ -60,17 +60,17 @@ export default function ProductListing() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
           <div>
-            <span className="text-brand-black/40 font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
+            <span className="text-brand-black/40 font-sans tracking-[0.1em] uppercase text-[11px] mb-2 block">
               Our Selection
             </span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-serif font-light tracking-[0.05em]">
               Featured Products
             </h2>
           </div>
 
           {/* Controls */}
           <div className="flex items-center gap-6">
-            <div className="flex items-center bg-gray-100 p-1 rounded-none">
+            <div className="flex items-center p-1 rounded-none border border-brand-black/5">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 transition-colors ${viewMode === 'grid' ? 'bg-brand-white shadow-sm text-brand-black' : 'text-brand-black/40'}`}
@@ -84,7 +84,7 @@ export default function ProductListing() {
                 <List size={18} />
               </button>
             </div>
-            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors">
+            <button className="flex items-center gap-2 text-[11px] font-sans uppercase tracking-[0.1em] bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors">
               <Filter size={14} />
               Filter
             </button>
@@ -97,7 +97,7 @@ export default function ProductListing() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`text-xs font-bold uppercase tracking-widest transition-all relative pb-2 ${
+              className={`text-[11px] font-sans uppercase tracking-[0.15em] transition-all relative pb-2 ${
                 activeCategory === cat ? 'text-brand-black' : 'text-brand-black/30 hover:text-brand-black'
               }`}
             >
@@ -119,7 +119,7 @@ export default function ProductListing() {
             <p className="text-sm font-medium uppercase tracking-widest text-brand-black/40">Loading Collection...</p>
           </div>
         ) : viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[100px] gap-y-[100px]">
             {filteredProducts.map((product) => (
               <ProductCard 
                 key={product.id} 
@@ -136,7 +136,7 @@ export default function ProductListing() {
                 layout
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="flex flex-col sm:flex-row gap-8 items-center bg-gray-50 p-6 group"
+                className="flex flex-col sm:flex-row gap-8 items-center border-b border-brand-black/5 pb-12 group"
               >
                 <div className="w-full sm:w-48 aspect-[3/4] overflow-hidden">
                   <img 
@@ -148,17 +148,17 @@ export default function ProductListing() {
                 </div>
                 <div className="flex-1 space-y-4">
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold mb-1">{product.category}</p>
-                    <h3 className="text-xl font-serif font-bold">{product.name}</h3>
+                    <p className="text-[11px] uppercase tracking-[0.1em] text-brand-black/40 font-sans mb-1">{product.category}</p>
+                    <h3 className="text-2xl font-serif font-light tracking-[0.05em]">{product.name}</h3>
                   </div>
-                  <p className="text-sm text-brand-black/60 max-w-xl line-clamp-2">{product.description}</p>
+                  <p className="text-sm text-brand-black/60 max-w-xl line-clamp-2 font-sans font-light">{product.description}</p>
                   <div className="flex items-center gap-6">
                     <div className="flex items-center gap-4">
-                      <span className="text-lg font-bold">${product.isSale ? product.salePrice : product.price}</span>
+                      <span className="text-lg font-sans tracking-[0.05em]">${product.isSale ? product.salePrice : product.price}</span>
                       <div className="flex gap-2">
                         <button 
                           onClick={() => setSelectedProduct(product)}
-                          className="text-xs font-bold uppercase tracking-widest border border-brand-black text-brand-black px-6 py-3 hover:bg-brand-black hover:text-brand-white transition-colors"
+                          className="text-[11px] font-sans uppercase tracking-[0.1em] border border-brand-black text-brand-black px-6 py-3 hover:bg-brand-black hover:text-brand-white transition-colors"
                         >
                           Details
                         </button>
@@ -167,7 +167,7 @@ export default function ProductListing() {
                             addToCart(product);
                             console.log(`Added to Cart: ${product.name}`);
                           }}
-                          className="text-xs font-bold uppercase tracking-widest bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors flex items-center gap-2"
+                          className="text-[11px] font-sans uppercase tracking-[0.1em] bg-brand-black text-brand-white px-6 py-3 hover:bg-brand-black/80 transition-colors flex items-center gap-2"
                         >
                           <ShoppingBag size={14} />
                           Add to Bag

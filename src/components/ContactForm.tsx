@@ -34,41 +34,41 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-brand-white border-t border-brand-black/5">
+    <section id="contact" className="py-24 bg-brand-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           
           {/* Info Side */}
           <div className="space-y-8">
             <div>
-              <span className="text-brand-black/40 font-semibold tracking-[0.3em] uppercase text-[10px] mb-2 block">
+              <span className="text-brand-black/40 font-sans tracking-[0.1em] uppercase text-[11px] mb-2 block">
                 Get in Touch
               </span>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6">
+              <h2 className="text-4xl md:text-5xl font-serif font-light tracking-[0.05em] mb-6">
                 Help & Support
               </h2>
-              <p className="text-brand-black/60 leading-relaxed max-w-md">
+              <p className="text-brand-black/60 leading-relaxed max-w-md font-sans font-light">
                 Our dedicated support team is here to assist you with any inquiries regarding our collections, orders, or styling advice.
               </p>
             </div>
 
             <div className="space-y-6 pt-4">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-black">
+                <div className="w-10 h-10 rounded-full border border-brand-black/5 flex items-center justify-center text-brand-black">
                   <Mail size={18} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest mb-1">Email Us</h4>
-                  <p className="text-sm text-brand-black/60">support@ateliermoderne.com</p>
+                  <h4 className="text-[11px] font-sans uppercase tracking-[0.1em] mb-1">Email Us</h4>
+                  <p className="text-sm text-brand-black/60 font-sans font-light">support@ateliermoderne.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-brand-black">
+                <div className="w-10 h-10 rounded-full border border-brand-black/5 flex items-center justify-center text-brand-black">
                   <MessageSquare size={18} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest mb-1">Live Chat</h4>
-                  <p className="text-sm text-brand-black/60">Available Mon-Fri, 9am - 6pm EST</p>
+                  <h4 className="text-[11px] font-sans uppercase tracking-[0.1em] mb-1">Live Chat</h4>
+                  <p className="text-sm text-brand-black/60 font-sans font-light">Available Mon-Fri, 9am - 6pm EST</p>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function ContactForm() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="bg-gray-50 p-12 flex flex-col items-center text-center justify-center min-h-[400px]"
+                  className="border border-brand-black/5 p-12 flex flex-col items-center text-center justify-center min-h-[400px]"
                 >
                   <div className="w-16 h-16 bg-brand-black/5 text-brand-black rounded-full flex items-center justify-center mb-6">
                     <CheckCircle2 size={32} />
@@ -109,7 +109,7 @@ export default function ContactForm() {
                   className="space-y-6"
                 >
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-brand-black/40 flex items-center gap-2">
+                    <label htmlFor="name" className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/40 flex items-center gap-2">
                       <User size={12} />
                       Full Name
                     </label>
@@ -121,12 +121,12 @@ export default function ContactForm() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all"
+                      className="w-full border border-brand-black/5 p-4 text-sm font-sans font-light focus:ring-1 focus:ring-brand-black outline-none transition-all"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-brand-black/40 flex items-center gap-2">
+                    <label htmlFor="email" className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/40 flex items-center gap-2">
                       <Mail size={12} />
                       Email Address
                     </label>
@@ -138,12 +138,12 @@ export default function ContactForm() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Enter your email"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all"
+                      className="w-full border border-brand-black/5 p-4 text-sm font-sans font-light focus:ring-1 focus:ring-brand-black outline-none transition-all"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-[10px] font-bold uppercase tracking-widest text-brand-black/40 flex items-center gap-2">
+                    <label htmlFor="message" className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/40 flex items-center gap-2">
                       <MessageSquare size={12} />
                       Your Message
                     </label>
@@ -155,14 +155,14 @@ export default function ContactForm() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="How can we help you?"
-                      className="w-full bg-gray-50 border-none p-4 text-sm focus:ring-1 focus:ring-brand-black outline-none transition-all resize-none"
+                      className="w-full border border-brand-black/5 p-4 text-sm font-sans font-light focus:ring-1 focus:ring-brand-black outline-none transition-all resize-none"
                     />
                   </div>
 
                   <button
                     disabled={isSubmitting}
                     type="submit"
-                    className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-widest text-[10px] font-bold flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
+                    className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-[0.1em] text-[11px] font-sans flex items-center justify-center gap-3 hover:bg-brand-black/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
                   >
                     {isSubmitting ? (
                       <motion.div
