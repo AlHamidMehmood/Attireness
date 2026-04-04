@@ -8,10 +8,10 @@ export default function Footer() {
       links: [
         { name: 'Contact Us', href: '#' },
         { name: 'FAQ', href: '#' },
-        { name: 'Find a Store', href: '#' },
+        { name: 'Find a store', href: '#' },
         { name: 'Gifting', href: '#' },
         { name: 'Sur-mesure', href: '#' },
-        { name: 'Maintenance and Repair', href: '#' },
+        { name: 'Maintenance and repair', href: '#' },
       ],
     },
     {
@@ -19,36 +19,36 @@ export default function Footer() {
       links: [
         { name: 'Payment', href: '#' },
         { name: 'Shipping', href: '#' },
-        { name: 'Collect in Store', href: '#' },
-        { name: 'Track Orders', href: '#' },
-        { name: 'Returns & Exchanges', href: '#' },
+        { name: 'Collect in store', href: '#' },
+        { name: 'Track orders', href: '#' },
+        { name: 'Returns & exchanges', href: '#' },
       ],
     },
     {
       title: 'ATTIRENESS BUNYAD',
       links: [
-        { name: 'The Maison', href: '/attireness-bunyad' },
-        { name: 'Sustainable Development', href: '#' },
-        { name: 'The Bunyad Foundation', href: '#' },
-        { name: 'Join Us', href: '#' },
-        { name: 'Finance & Governance', href: '#' },
+        { name: 'Sustainable development', href: '/attireness-bunyad' },
+        { name: 'The Bunyad Foundation', href: '/attireness-bunyad' },
+        { name: 'Join us', href: '/attireness-bunyad' },
+        { name: 'Finance & Governance', href: '/attireness-bunyad' },
+        { name: 'Our Maison', href: '/attireness-bunyad' },
       ],
     },
     {
       title: 'LEGAL',
       links: [
-        { name: 'Terms and Conditions', href: '#' },
+        { name: 'Terms and conditions', href: '#' },
         { name: 'Privacy', href: '#' },
         { name: 'Cookies', href: '#' },
         { name: 'Accessibility', href: '#' },
-        { name: 'Legal Notices', href: '#' },
+        { name: 'Legal notices', href: '#' },
       ],
     },
   ];
 
   return (
     <footer className="bg-brand-white pt-24 pb-12 border-t border-brand-black/5">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-24 mb-24">
           {footerSections.map((section) => (
             <div key={section.title} className="space-y-6">

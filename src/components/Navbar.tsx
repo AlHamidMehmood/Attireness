@@ -22,6 +22,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        // Ensure absolute path for reliability across routes
         const response = await fetch('/products.json');
         if (response.ok) {
           const data = await response.json();
@@ -45,11 +46,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-white/80 backdrop-blur-md border-b border-brand-black/5">
-        <div className="max-w-[1800px] mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20">
+      <nav className="z-50 bg-brand-white relative">
+        {/* Top Row: Logo & Icons */}
+        <div className="border-b border-brand-black/5 bg-brand-white">
+          <div className="max-w-[1800px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between relative">
             {/* Mobile Menu Toggle */}
-            <div className="flex items-center lg:hidden">
+            <div className="flex items-center lg:hidden flex-1">
               <button 
                 className="p-2 -ml-2"
                 onClick={() => setIsOpen(!isOpen)}
@@ -57,31 +59,19 @@ export default function Navbar() {
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
+            
+            {/* Spacer for desktop to help center logo */}
+            <div className="hidden lg:block flex-1"></div>
 
-            {/* Logo */}
-            <div className="flex-shrink-0">
+            {/* Logo Centered */}
+            <div className="absolute left-1/2 -translate-x-1/2">
               <Link to="/" className="text-2xl font-serif font-light tracking-[0.05em]">
                 ATTIRENESS<span className="text-brand-black">.</span>
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => setActiveCategory(link.name as Category)}
-                  className={`text-[11px] font-sans uppercase tracking-[0.15em] transition-colors duration-300 ${
-                    activeCategory === link.name ? 'text-brand-black font-bold' : 'text-brand-black/40 hover:text-brand-black'
-                  }`}
-                >
-                  {link.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Icons */}
-            <div className="flex items-center space-x-5">
+            {/* Icons Right */}
+            <div className="flex items-center space-x-5 flex-1 justify-end">
               {/* Currency Switcher */}
               <div className="hidden xl:flex items-center space-x-2 border-r border-brand-black/5 pr-5 mr-2">
                 <button 
@@ -131,6 +121,23 @@ export default function Navbar() {
                 )}
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom Row: Categories - Sticky */}
+        <div className="sticky top-0 z-50 bg-brand-white/90 backdrop-blur-md border-b border-brand-black/5 hidden lg:block">
+          <div className="max-w-[1800px] mx-auto px-6 lg:px-12 h-12 flex items-center justify-center space-x-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => setActiveCategory(link.name as Category)}
+                className={`text-[11px] font-sans uppercase tracking-[0.15em] transition-colors duration-300 ${
+                  activeCategory === link.name ? 'text-brand-black font-bold' : 'text-brand-black/40 hover:text-brand-black'
+                }`}
+              >
+                {link.name}
+              </button>
+            ))}
           </div>
         </div>
 
