@@ -159,7 +159,7 @@ export default function ProductListing() {
                   <div className="flex items-center gap-6">
                     <div className="flex items-center gap-4">
                       <span className="text-lg font-sans tracking-[0.05em]">
-                        Price {formatPrice(convertPrice(product.basePrice, product.baseCurrency, displayCurrency), displayCurrency)}
+                        {formatPrice(convertPrice(product.basePrice, product.baseCurrency, displayCurrency), displayCurrency)}
                       </span>
                       <div className="flex gap-2">
                         <button 

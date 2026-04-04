@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ShoppingBag, Plus, Minus, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { convertPrice, formatPrice } from '../lib/currency';
@@ -8,6 +9,12 @@ import { convertPrice, formatPrice } from '../lib/currency';
 export default function CartDrawer() {
   const { cart, removeFromCart, updateQuantity, totalPrice, isCartOpen, setIsCartOpen, itemCount } = useCart();
   const { displayCurrency } = useCurrency();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    navigate('/checkout');
+  };
 
   return (
     <AnimatePresence>
@@ -110,7 +117,7 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <span className="text-sm font-sans tracking-[0.05em]">
-                            Price {formatPrice(itemTotal, displayCurrency)}
+                            {formatPrice(itemTotal, displayCurrency)}
                           </span>
                         </div>
                       </div>
@@ -125,12 +132,15 @@ export default function CartDrawer() {
               <div className="p-6 border-t border-brand-black/5 space-y-6">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/40">Subtotal</span>
-                  <span className="text-xl font-sans tracking-[0.05em]">Price {formatPrice(totalPrice, displayCurrency)}</span>
+                  <span className="text-xl font-sans tracking-[0.05em]">{formatPrice(totalPrice, displayCurrency)}</span>
                 </div>
                 <p className="text-[10px] text-brand-black/40 text-center font-sans">
                   Shipping and taxes calculated at checkout.
                 </p>
-                <button className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-[0.1em] text-[11px] font-sans hover:bg-brand-black/80 transition-all duration-300">
+                <button 
+                  onClick={handleCheckout}
+                  className="w-full bg-brand-black text-brand-white py-5 px-8 uppercase tracking-[0.1em] text-[11px] font-sans hover:bg-brand-black/80 transition-all duration-300"
+                >
                   Proceed to Checkout
                 </button>
               </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ShoppingBag, Search, User, Heart, Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -32,9 +33,9 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-serif font-light tracking-[0.05em]">
+            <Link to="/" className="text-2xl font-serif font-light tracking-[0.05em]">
               ATTIRENESS<span className="text-brand-black">.</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

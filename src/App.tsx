@@ -1,7 +1,7 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import ProductListing from "./components/ProductListing";
-import ContactForm from "./components/ContactForm";
+import Home from "./pages/Home";
+import Checkout from "./pages/Checkout";
 import CartDrawer from "./components/CartDrawer";
 import Footer from "./components/Footer";
 import { WishlistProvider } from "./context/WishlistContext";
@@ -13,16 +13,19 @@ export default function App() {
     <CurrencyProvider>
       <CartProvider>
         <WishlistProvider>
-          <div className="min-h-screen">
-            <Navbar />
-            <CartDrawer />
-            <main>
-              <Hero />
-              <ProductListing />
-              <ContactForm />
-            </main>
-            <Footer />
-          </div>
+          <Router>
+            <div className="min-h-screen">
+              <Navbar />
+              <CartDrawer />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </Router>
         </WishlistProvider>
       </CartProvider>
     </CurrencyProvider>

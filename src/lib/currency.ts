@@ -19,9 +19,8 @@ export function convertPrice(price: number, from: Currency, to: Currency): numbe
 export function formatPrice(price: number, currency: Currency): string {
   const symbol = currency === 'USD' ? '$' : 'Rs. ';
   
-  // For PKR, we usually don't show decimals if it's a large amount, but let's keep it consistent
   const formatted = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: currency === 'USD' ? 2 : 0,
+    minimumFractionDigits: 0,
     maximumFractionDigits: currency === 'USD' ? 2 : 0,
   }).format(price);
   
