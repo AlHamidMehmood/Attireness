@@ -7,6 +7,9 @@ import ProductModal from "./ProductModal";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 
+import { useCurrency } from "../context/CurrencyContext";
+import { convertPrice, formatPrice } from "../lib/currency";
+
 export default function ProductListing() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -15,14 +18,15 @@ export default function ProductListing() {
   const [loading, setLoading] = useState(true);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { displayCurrency } = useCurrency();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         
-        // Use relative path which is more reliable in various environments
-        const response = await fetch('products.json');
+        // Use absolute path for reliability
+        const response = await fetch('/products.json');
         
         if (!response.ok) {
           throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
@@ -154,7 +158,9 @@ export default function ProductListing() {
                   <p className="text-sm text-brand-black/60 max-w-xl line-clamp-2 font-sans font-light">{product.description}</p>
                   <div className="flex items-center gap-6">
                     <div className="flex items-center gap-4">
-                      <span className="text-lg font-sans tracking-[0.05em]">${product.isSale ? product.salePrice : product.price}</span>
+                      <span className="text-lg font-sans tracking-[0.05em]">
+                        Price {formatPrice(convertPrice(product.basePrice, product.baseCurrency, displayCurrency), displayCurrency)}
+                      </span>
                       <div className="flex gap-2">
                         <button 
                           onClick={() => setSelectedProduct(product)}

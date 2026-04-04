@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
               {product.name}
             </h3>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black">{formattedPrice}</span>
+              <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black">Price {formattedPrice}</span>
             </div>
           </div>
         </div>

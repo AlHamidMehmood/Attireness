@@ -72,7 +72,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                   {product.name}
                 </h2>
                 <div className="flex items-center gap-4">
-                  <span className="text-2xl font-sans tracking-[0.05em] text-brand-black">{formattedPrice}</span>
+                  <span className="text-2xl font-sans tracking-[0.05em] text-brand-black">Price {formattedPrice}</span>
                 </div>
               </div>
 

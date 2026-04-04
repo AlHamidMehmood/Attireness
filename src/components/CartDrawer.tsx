@@ -110,7 +110,7 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <span className="text-sm font-sans tracking-[0.05em]">
-                            {formatPrice(itemTotal, displayCurrency)}
+                            Price {formatPrice(itemTotal, displayCurrency)}
                           </span>
                         </div>
                       </div>
@@ -125,7 +125,7 @@ export default function CartDrawer() {
               <div className="p-6 border-t border-brand-black/5 space-y-6">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/40">Subtotal</span>
-                  <span className="text-xl font-sans tracking-[0.05em]">{formatPrice(totalPrice, displayCurrency)}</span>
+                  <span className="text-xl font-sans tracking-[0.05em]">Price {formatPrice(totalPrice, displayCurrency)}</span>
                 </div>
                 <p className="text-[10px] text-brand-black/40 text-center font-sans">
                   Shipping and taxes calculated at checkout.
