@@ -1,11 +1,13 @@
-import { ShoppingBag, Search, User, Heart, Menu, X } from "lucide-react";
+import { ShoppingBag, Search, User, Heart, Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { setIsCartOpen, itemCount } = useCart();
+  const { displayCurrency, setDisplayCurrency } = useCurrency();
 
   const navLinks = [
     { name: "New Arrivals", href: "#" },
@@ -19,12 +21,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Mobile Menu Toggle */}
-          <button 
-            className="lg:hidden p-2 -ml-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center lg:hidden">
+            <button 
+              className="p-2 -ml-2"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -48,6 +52,23 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="flex items-center space-x-5">
+            {/* Currency Switcher */}
+            <div className="hidden md:flex items-center space-x-2 border-r border-brand-black/5 pr-5 mr-2">
+              <button 
+                onClick={() => setDisplayCurrency('USD')}
+                className={`text-[10px] font-sans uppercase tracking-widest transition-colors ${displayCurrency === 'USD' ? 'text-brand-black font-bold' : 'text-brand-black/40 hover:text-brand-black'}`}
+              >
+                USD
+              </button>
+              <span className="text-brand-black/10">/</span>
+              <button 
+                onClick={() => setDisplayCurrency('PKR')}
+                className={`text-[10px] font-sans uppercase tracking-widest transition-colors ${displayCurrency === 'PKR' ? 'text-brand-black font-bold' : 'text-brand-black/40 hover:text-brand-black'}`}
+              >
+                PKR
+              </button>
+            </div>
+
             <button className="p-2 hover:text-brand-black/60 transition-colors">
               <Search size={20} strokeWidth={1.5} />
             </button>

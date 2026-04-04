@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product } from '../types';
+import { useCurrency } from './CurrencyContext';
+import { convertPrice } from '../lib/currency';
 
 interface CartItem extends Product {
   quantity: number;
@@ -22,6 +24,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { displayCurrency } = useCurrency();
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -74,8 +77,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const totalPrice = cart.reduce((total, item) => {
-    const price = item.isSale && item.salePrice ? item.salePrice : item.price;
-    return total + price * item.quantity;
+    const currentPrice = convertPrice(item.basePrice, item.baseCurrency, displayCurrency);
+    return total + currentPrice * item.quantity;
   }, 0);
 
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);

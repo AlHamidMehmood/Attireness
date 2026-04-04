@@ -4,6 +4,8 @@ import { ShoppingBag, Heart, Eye } from "lucide-react";
 import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
+import { convertPrice, formatPrice } from "../lib/currency";
 
 interface ProductCardProps {
   product: Product;
@@ -14,7 +16,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { displayCurrency } = useCurrency();
   const isFavorited = isInWishlist(product.id);
+
+  const currentPrice = convertPrice(product.basePrice, product.baseCurrency, displayCurrency);
+  const formattedPrice = formatPrice(currentPrice, displayCurrency);
 
   return (
     <motion.div
@@ -58,14 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
               {product.name}
             </h3>
             <div className="flex items-center gap-2">
-              {product.isSale ? (
-                <>
-                  <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black">${product.salePrice}</span>
-                  <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black/30 line-through">${product.price}</span>
-                </>
-              ) : (
-                <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black">${product.price}</span>
-              )}
+              <span className="text-[11px] font-sans uppercase tracking-[0.1em] text-brand-black">{formattedPrice}</span>
             </div>
           </div>
         </div>

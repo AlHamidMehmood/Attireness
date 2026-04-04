@@ -3,6 +3,8 @@ import { X, ShoppingBag, Heart } from "lucide-react";
 import { Product } from "../types";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import { useCurrency } from "../context/CurrencyContext";
+import { convertPrice, formatPrice } from "../lib/currency";
 
 interface ProductModalProps {
   product: Product;
@@ -12,7 +14,11 @@ interface ProductModalProps {
 export default function ProductModal({ product, onClose }: ProductModalProps) {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { displayCurrency } = useCurrency();
   const isFavorited = isInWishlist(product.id);
+
+  const currentPrice = convertPrice(product.basePrice, product.baseCurrency, displayCurrency);
+  const formattedPrice = formatPrice(currentPrice, displayCurrency);
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -66,14 +72,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                   {product.name}
                 </h2>
                 <div className="flex items-center gap-4">
-                  {product.isSale ? (
-                    <>
-                      <span className="text-2xl font-sans tracking-[0.05em] text-brand-black">${product.salePrice}</span>
-                      <span className="text-lg text-brand-black/40 line-through font-sans">${product.price}</span>
-                    </>
-                  ) : (
-                    <span className="text-2xl font-sans tracking-[0.05em]">${product.price}</span>
-                  )}
+                  <span className="text-2xl font-sans tracking-[0.05em] text-brand-black">{formattedPrice}</span>
                 </div>
               </div>
 

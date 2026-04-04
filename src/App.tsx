@@ -6,22 +6,25 @@ import CartDrawer from "./components/CartDrawer";
 import Footer from "./components/Footer";
 import { WishlistProvider } from "./context/WishlistContext";
 import { CartProvider } from "./context/CartContext";
+import { CurrencyProvider } from "./context/CurrencyContext";
 
 export default function App() {
   return (
-    <CartProvider>
-      <WishlistProvider>
-        <div className="min-h-screen">
-          <Navbar />
-          <CartDrawer />
-          <main>
-            <Hero />
-            <ProductListing />
-            <ContactForm />
-          </main>
-          <Footer />
-        </div>
-      </WishlistProvider>
-    </CartProvider>
+    <CurrencyProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <div className="min-h-screen">
+            <Navbar />
+            <CartDrawer />
+            <main>
+              <Hero />
+              <ProductListing />
+              <ContactForm />
+            </main>
+            <Footer />
+          </div>
+        </WishlistProvider>
+      </CartProvider>
+    </CurrencyProvider>
   );
 }
