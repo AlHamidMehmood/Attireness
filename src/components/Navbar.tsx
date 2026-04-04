@@ -67,12 +67,6 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link
-                to="/attireness-bunyad"
-                className="text-[11px] font-sans uppercase tracking-[0.2em] text-brand-black/60 hover:text-brand-black transition-colors duration-300 border-r border-brand-black/10 pr-8 mr-2"
-              >
-                The Maison
-              </Link>
               {navLinks.map((link) => (
                 <button
                   key={link.name}
