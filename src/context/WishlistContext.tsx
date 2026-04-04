@@ -4,11 +4,14 @@ interface WishlistContextType {
   wishlist: string[];
   toggleWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
+  isWishlistOpen: boolean;
+  setIsWishlistOpen: (isOpen: boolean) => void;
 }
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [wishlist, setWishlist] = useState<string[]>(() => {
     const saved = localStorage.getItem('wishlist');
     return saved ? JSON.parse(saved) : [];
@@ -29,7 +32,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   const isInWishlist = (productId: string) => wishlist.includes(productId);
 
   return (
-    <WishlistContext.Provider value={{ wishlist, toggleWishlist, isInWishlist }}>
+    <WishlistContext.Provider value={{ wishlist, toggleWishlist, isInWishlist, isWishlistOpen, setIsWishlistOpen }}>
       {children}
     </WishlistContext.Provider>
   );

@@ -9,11 +9,12 @@ import { useCart } from "../context/CartContext";
 
 import { useCurrency } from "../context/CurrencyContext";
 import { convertPrice, formatPrice } from "../lib/currency";
+import { useCategory, CATEGORIES, Category } from "../context/CategoryContext";
 
 export default function ProductListing() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const { activeCategory, setActiveCategory } = useCategory();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -52,11 +53,9 @@ export default function ProductListing() {
     fetchProducts();
   }, []);
 
-  const categories = ['All', 'WOMEN', 'MEN', 'FRAGNANCES', 'MAKEUP', 'LEATHER GOODS', 'JEWELRY', 'WATCHES', 'SURPRISES TE GIFTS'];
-
-  const filteredProducts = activeCategory === 'All' 
+  const filteredProducts = activeCategory === 'ALL' 
     ? products 
-    : products.filter(p => p.category === activeCategory);
+    : products.filter(p => p.category.toUpperCase() === activeCategory);
 
   return (
     <section id="products" className="py-24 bg-brand-white">
@@ -97,10 +96,10 @@ export default function ProductListing() {
 
         {/* Categories Filter */}
         <div className="flex flex-wrap gap-8 mb-16 border-b border-brand-black/5 pb-6 overflow-x-auto no-scrollbar">
-          {categories.map((cat) => (
+          {CATEGORIES.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => setActiveCategory(cat as Category)}
               className={`text-[11px] font-sans uppercase tracking-[0.15em] transition-all relative pb-2 ${
                 activeCategory === cat ? 'text-brand-black' : 'text-brand-black/30 hover:text-brand-black'
               }`}

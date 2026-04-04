@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const footerSections = [
@@ -26,11 +27,11 @@ export default function Footer() {
     {
       title: 'ATTIRENESS BUNYAD',
       links: [
+        { name: 'The Maison', href: '/attireness-bunyad' },
         { name: 'Sustainable Development', href: '#' },
         { name: 'The Bunyad Foundation', href: '#' },
         { name: 'Join Us', href: '#' },
         { name: 'Finance & Governance', href: '#' },
-        { name: 'Our Maison', href: '#' },
       ],
     },
     {
@@ -57,12 +58,21 @@ export default function Footer() {
               <ul className="space-y-4">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-[11px] font-sans uppercase tracking-[0.15em] text-brand-black/50 hover:text-brand-black transition-colors duration-300"
-                    >
-                      {link.name}
-                    </a>
+                    {link.href.startsWith('/') ? (
+                      <Link
+                        to={link.href}
+                        className="text-[11px] font-sans uppercase tracking-[0.15em] text-brand-black/50 hover:text-brand-black transition-colors duration-300"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-[11px] font-sans uppercase tracking-[0.15em] text-brand-black/50 hover:text-brand-black transition-colors duration-300"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
